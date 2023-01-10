@@ -33,17 +33,7 @@ The two principal anchors in this regex expression are the ^ at the beginning an
 
 ### Quantifiers
 
-Notice that some of the components of capture groups end with a ? or a *. These are generally known as quantifiers. Quantifiers are used to define the number of times a given expression may be identified. The ? makes a single instance of the character preceding the quantifier optional, whereas the * makes multiple instances of the characters preceding the quantifier optional. For example, the grouping
-
-(https?:\/\/)?
-contains two ? quantifiers. This expression is looking for an http:// OR an https://. For this reason a single internal s is optional. The same is true for the entire expression included in the parenthesis, for which reason it is followed by a ?. In other words, a valid URL may begin with http:// OR https://, or it may not begin with either of them at all (the input begins with www.). The same applies for the / at the very end of the expression.
-
-Similarly, the * makes the expression optional, but in this case it may be one or more instances that are optional. So if we look at the fourth grouping:
-
-([\/\w \.-]*)*
-The expression is allowing for any number of filepath characters that may follow an initial specified domain.
-
-Finally, the {} quantifier defines a range of possible instances where a match may be identified. In evaluating the Top level domain, the regular expression allows for the top level domain to consist of 2 to 6 characters.
+Quantifiers are used to specify how many times a character or group of characters should be matched. In this expression, the question mark (?) is used as a quantifier to match either 0 or 1 instances of the preceding character or group. The asterisk (*) is also used as a quantifier to match 0 or more instances of the preceding character or group.
 
 
 ### OR Operator
@@ -52,32 +42,24 @@ The main OR operator used in the above regex is the []. The expression will matc
 
 ### Character Classes
 
-The main character classes to consider in the above expression include the \d character class which looks for any digit, and the \w character class that looks for any alphanumeric character.
+Character classes are used to match any one character from a set of characters. In this expression, character classes are used to match specific characters within the URL. For example, [\da-z] is used to match any lowercase letter or digit, and [a-z.] is used to match any lowercase letter or period.
 
 
 ### Flags
-Flags are used to set options for the regex. Some common flags include:
 
-i: Ignore case
-g: Global search (find all matches rather than stopping after the first match)
-m: Multiline search (allow the caret (^) and dollar sign ($) to match the start and end of lines in addition to the start and end of the string)
+Flags are used to modify the behavior of the regular expression. In this expression, no flags are used.
 
 ### Grouping and Capturing
 
-So what is included between the two anchors. If we examine the expression, we can see that there are a number of components separated by parentheses (). Parentheses are used in regex to create separate groups of interest. Within each of these groups, there is a regex that we may look at separately to see what is evaluated. These include:
-
-the initial https component: (https?:\/\/)
-the domain name (e.g. www.google, or pets): ([\da-z\.-]+)\.
-the top level domain (.com, .gov, etc): ([a-z\.]{2,6})
-the file path: ([\/\w \.-]*)*
+Grouping and capturing is used to group characters together and capture the matched text for later reference. In this expression, grouping is used to group characters together, as seen with the parentheses around certain parts of the expression. Capturing is not used in this expression.
 
 ### Bracket Expressions
 
-Bracket expressions are similar to character classes, but they allow you to specify a range of characters to match. For example, the bracket expression [a-z] will match any lowercase letter.
+Bracket expressions are used to match a range of characters. In this expression, bracket expressions are used to match a range of characters within the URL. For example, [/\w .-] is used to match a forward slash, word character, space, period, or hyphen.
 
 ### Greedy and Lazy Match
 
-By default, regexes are greedy, which means that they will try to match as much as possible. Lazy match, on the other hand, will try to match as little as possible. You can make a regex lazy by adding a ? after the quantifier.
+Greedy and lazy match refer to how the regular expression engine handles repetition. A greedy match will try to match as many characters as possible, while a lazy match will try to match as few characters as possible. In this expression, greedy match is used, as seen with the use of the asterisk (*) quantifier.
 
 ### Boundaries
 
